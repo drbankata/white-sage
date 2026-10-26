@@ -1,0 +1,3 @@
+# Preview for White Sage's approval: not for search engines yet (common.INDEX = False).
+User-agent: *
+Disallow: /
