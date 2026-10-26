@@ -3,8 +3,8 @@
    Mobile-first. Breakpoints: 640 / 900 / 1100 (desktop menu) / 1280. Colours ONLY from the :root tokens.
    ===================================================================== */
 
-@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-italic.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../fonts/playfair.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../fonts/playfair-italic.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
 @font-face { font-family: "Manrope"; src: url("../fonts/manrope.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
 
 :root {
@@ -34,7 +34,7 @@
   --on-dark-soft: #C2C5DA;
   --ok: #2E6B3A;
 
-  --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;   /* holds its strokes at 1x (MarkBank D-67); Bodoni Moda did not */
   --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --gutter: 20px;
@@ -62,6 +62,7 @@ address { font-style: normal; }
 p, li, dd, dt, address, h1, h2, h3, h4, td, th, summary { overflow-wrap: break-word; }
 ul, ol { margin: 0 0 1em; padding-left: 1.2em; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; line-height: 1.14; margin: 0 0 .5em; letter-spacing: -.005em; text-wrap: balance; color: var(--ink); }
+h1, h2, h3, h4, .wm, .stats b, .trust b, .route b, .benefits b, .fh, .faq summary { font-variant-numeric: lining-nums; }   /* Playfair's default old-style digits looked uneven in 20+, 80+, 10,000+ */
 h1 { font-size: clamp(2.3rem, 6.4vw, 4.3rem); line-height: 1.06; }
 h2 { font-size: clamp(1.8rem, 4vw, 2.75rem); }
 h3 { font-size: 1.35rem; }
@@ -92,7 +93,8 @@ strong, b { font-weight: 700; }
 .sec-head h2 { margin-bottom: .3em; }
 .sec-head p { color: var(--ink-2); font-size: 1.08rem; margin: 0; }
 .sec-head .kicker { margin-bottom: 12px; }
-.kicker { display: flex; align-items: center; gap: 12px; font-size: .95rem; font-weight: 600; color: var(--ink-2); margin: 0 0 16px; }
+.kicker { display: flex; align-items: center; gap: 12px; font-size: .95rem; font-weight: 600; color: var(--ink-2); margin: 0 0 16px; text-wrap: balance; }
+@media (max-width: 639px) { .hero .kicker .rule { display: none; } }
 .kicker .rule { width: 34px; height: 1.5px; background: var(--sage); flex: none; }
 .kicker-light { color: var(--on-dark-soft); }
 .kicker-light .rule { background: var(--sage-light); }
@@ -123,9 +125,9 @@ strong, b { font-weight: 700; }
 .head-in { display: flex; align-items: center; gap: 16px; height: 100%; }
 .brand { display: inline-flex; align-items: center; text-decoration: none; color: var(--ink); min-width: 0; margin-right: auto; }
 .brand:hover { color: var(--ink); }
-.wm { font-family: var(--serif); font-weight: 500; font-size: 1.85rem; line-height: 1; letter-spacing: .01em; white-space: nowrap; }
+.wm { font-family: var(--serif); font-weight: 500; font-size: 1.8rem; line-height: 1; white-space: nowrap; }
 .wm-i { position: relative; }
-.wm-i::after { content: ""; position: absolute; left: 50%; top: .38em; width: .15em; height: .15em; border-radius: 50%; background: var(--dot); transform: translateX(-50%); }
+.wm-i::after { content: ""; position: absolute; left: 50%; top: .25em; width: .15em; height: .15em; border-radius: 50%; background: var(--dot); transform: translateX(-50%); }
 .menu-btn { width: 46px; height: 46px; border: 0; background: transparent; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--ink); flex: none; }
 .menu-btn svg { width: 26px; height: 26px; }
 .head-cta { display: none; }
@@ -183,7 +185,13 @@ strong, b { font-weight: 700; }
 .hchip-b { left: 26%; top: 0; }
 .hchip-c { right: 8%; bottom: 0; }
 .live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(46, 107, 58, .15); flex: none; }
-@media (max-width: 420px) { .hchip { font-size: .72rem; padding: 6px 10px 6px 8px; white-space: normal; max-width: 64%; } .hchip svg { width: 14px; height: 14px; } .hchip-b { left: 18%; } }
+/* phones: one picture and one chip (the full collage crowds a small screen) */
+@media (max-width: 639px) {
+  .collage { aspect-ratio: auto; max-width: 440px; padding: 0 14px 14px 0; }
+  .collage .halo, .c-plan, .c-lobby, .hchip-b, .hchip-c { display: none; }
+  .collage .c-main { position: relative; right: auto; top: auto; width: 100%; }
+  .collage .hchip-a { right: 26px; top: auto; bottom: 30px; font-size: .78rem; }
+}
 
 .benefits { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin-top: 40px; background: var(--line); border-top: 1px solid var(--line); }
 .benefits > div { background: var(--paper-2); padding: 18px 4px 18px 0; display: flex; gap: 14px; align-items: flex-start; min-width: 0; }
@@ -249,8 +257,9 @@ strong, b { font-weight: 700; }
   .person .card-body { padding: 16px 16px 16px 18px; }
 }
 .role { color: var(--ink-2); font-size: .95rem; font-weight: 600; margin: 0 0 6px; }
-.yrs { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font-size: .88rem; font-weight: 600; margin: 0 0 12px; }
-.yrs svg { width: 16px; height: 16px; color: var(--sage); }
+.yrs { display: flex; align-items: flex-start; gap: 7px; color: var(--ink-3); font-size: .88rem; font-weight: 600; line-height: 1.45; margin: 0 0 12px; }
+.yrs svg { width: 16px; height: 16px; flex: none; margin-top: .14em; color: var(--sage); }
+.profile .role .yrs { display: inline-flex; }
 
 /* chips (lists of organisations, centres, degrees) */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 18px; }
@@ -341,6 +350,8 @@ strong, b { font-weight: 700; }
 .feature-logo img { width: 100%; max-width: 380px; height: auto; }
 .feature-copy h2, .feature-copy h3 { margin-bottom: 6px; }
 .feature-copy h3 { font-size: 1.7rem; }
+.feature-copy h3.h4 { font-family: var(--sans); font-size: .95rem; font-weight: 700; margin: 18px 0 8px; }
+.feature-lg { align-items: start; }
 .where { display: flex; gap: 8px; align-items: flex-start; color: var(--ink-2); font-weight: 600; }
 .where svg { width: 19px; height: 19px; color: var(--red); flex: none; margin-top: 3px; }
 .feature-copy > p { color: var(--ink-2); }
