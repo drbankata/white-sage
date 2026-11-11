@@ -5,4 +5,4 @@ existing ones, and advisory).
 
 Static site served by GitHub Pages: https://drbankata.github.io/white-sage/ (a preview, not indexed by search engines).
 
-Designed by Dr Sudhanshu Bankata (MD, PGP) · https://lexmedix.in/services/
+Designed by Lexmedix · founded by Dr Sudhanshu Bankata (MD, MBA) · https://lexmedix.in/services/
